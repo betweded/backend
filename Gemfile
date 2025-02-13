@@ -10,7 +10,9 @@ gem "pg", "~> 1.1"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
+gem "image_processing", ">= 1.2"
 gem "active_model_serializers"
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
@@ -49,6 +51,6 @@ group :development do
 end
 
 group :test do
-  gem "database_cleaner-active_record"
-  gem "shoulda-matchers"
+  gem 'database_cleaner-active_record'
+  gem 'shoulda-matchers'
 end
