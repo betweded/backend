@@ -7,7 +7,7 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_db: app_development
+      POSTGRES_db: app_production
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
     networks:
@@ -23,8 +23,8 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/app_development
-      RAILS_ENV: development
+      DATABASE_URL: postgres://postgres:password@db:5432/app_production
+      RAILS_ENV: production
       RAILS_MASTER_KEY: c05bb6dc94e26b347f3209a1ac1a7192
     networks:
       - backend
