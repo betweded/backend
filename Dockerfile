@@ -35,7 +35,7 @@ COPY . .
 RUN bundle exec bootsnap precompile app/ lib/
 
 # Copy master key for production
-# COPY config/master.key config/master.key
+COPY config/master.key config/master.key
 
 # Final stage for app image
 FROM base
