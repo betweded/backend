@@ -1,8 +1,18 @@
-#!/bin/bash -e
+#!/bin/sh
+set -e
 
-# If running the rails server then create or migrate existing database
-if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
-  ./bin/rails db:prepare
+echo "Waiting for database to be ready..."
+until pg_isready -h "$DATABASE_HOST" -p 5432 -U "$DATABASE_USER"; do
+  sleep 2
+done
+
+echo "Checking if database exists..."
+if ! PGPASSWORD=$DATABASE_PASSWORD psql -h "$DATABASE_HOST" -U "$DATABASE_USER" -d "$DATABASE_NAME" -c '\q' 2>/dev/null; then
+  echo "Database does not exist. Creating..."
+  bundle exec rails db:create
 fi
 
-exec "${@}"
+echo "Running migrations..."
+bundle exec rails db:migrate
+
+exec "$@"

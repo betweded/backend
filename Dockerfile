@@ -23,8 +23,7 @@ RUN apt-get update -qq && \
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
-RUN bundle lock --add-platform x86_64-linux && \
-    bundle install && \
+RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
@@ -56,9 +55,14 @@ RUN useradd rails --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp config/master.key
 USER rails:rails
 
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
+# # Entrypoint prepares the database.
+# ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+COPY bin/docker-entrypoint /usr/bin/docker-entrypoint
+RUN chmod +x /usr/bin/docker-entrypoint
+ENTRYPOINT ["/usr/bin/docker-entrypoint"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+
+# # Start the server by default, this can be overwritten at runtime
+# EXPOSE 3000
+# CMD ["./bin/rails", "server"]

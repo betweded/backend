@@ -1,13 +1,13 @@
 version: '3'
 services:
-  db1:
+  db:
     image: postgres
     volumes:
-      - db1_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_db1: app_development
+      POSTGRES_db: app_development
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
     networks:
@@ -21,16 +21,16 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - db1
+      - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db1:5432/app_development
+      DATABASE_URL: postgres://postgres:password@db:5432/app_development
       RAILS_ENV: development
       RAILS_MASTER_KEY: c05bb6dc94e26b347f3209a1ac1a7192
     networks:
       - backend
 
 volumes:
-  db1_data: {}
+  db_data: {}
 
 networks:
   backend:
