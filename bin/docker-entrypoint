@@ -2,12 +2,12 @@
 set -e
 
 echo "Waiting for database to be ready..."
-until pg_isready -h "$DATABASE_HOST" -p 5432 -U "$DATABASE_USER"; do
+until pg_isready -h dpg-cunqnilds78s7386vlv0-a -p 5432 -U db_qfes_user; do
   sleep 2
 done
 
 echo "Checking if database exists..."
-if ! PGPASSWORD=$DATABASE_PASSWORD psql -h "$DATABASE_HOST" -U "$DATABASE_USER" -d "$DATABASE_NAME" -c '\q' 2>/dev/null; then
+if ! PGPASSWORD=1rM6chFq6j2nwuFzkhO7NcO1D0t8cd92 psql -h dpg-cunqnilds78s7386vlv0-a -U db_qfes_user -d db_qfes -c '\q' 2>/dev/null; then
   echo "Database does not exist. Creating..."
   bundle exec rails db:create
 fi

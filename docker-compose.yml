@@ -7,9 +7,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_db: app_production
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: postgres
+      POSTGRES_db: db_qfes
+      POSTGRES_PASSWORD: 1rM6chFq6j2nwuFzkhO7NcO1D0t8cd92
+      POSTGRES_USER: db_qfes_user
     networks:
       - backend
 
@@ -23,7 +23,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/app_production
+      DATABASE_URL: postgresql://db_qfes_user:1rM6chFq6j2nwuFzkhO7NcO1D0t8cd92@dpg-cunqnilds78s7386vlv0-a/db_qfes
       RAILS_ENV: production
       RAILS_MASTER_KEY: c05bb6dc94e26b347f3209a1ac1a7192
     networks:
