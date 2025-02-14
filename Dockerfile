@@ -53,7 +53,7 @@ COPY --from=build /rails/config/master.key /rails/config/master.key
 
 # Run and own only the runtime files as a non-root user for security
 RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db1 log storage tmp config/master.key
+    chown -R rails:rails db log storage tmp config/master.key
 USER rails:rails
 
 # Entrypoint prepares the database.
