@@ -5,7 +5,7 @@ services:
     volumes:
       - db_data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
@@ -22,7 +22,7 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/app_production
+      DATABASE_URL: postgres://postgres:password@db:5432/app_development
       RAILS_ENV: development
       RAILS_MASTER_KEY: c05bb6dc94e26b347f3209a1ac1a7192
     networks:
