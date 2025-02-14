@@ -59,7 +59,7 @@ USER rails:rails
 # ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 COPY bin/docker-entrypoint /rails/bin/docker-entrypoint
-RUN chmod +x /rails/bin/docker-entrypoint
+# RUN chmod +x /rails/bin/docker-entrypoint
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
 
