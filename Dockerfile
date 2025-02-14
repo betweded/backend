@@ -58,10 +58,11 @@ USER rails:rails
 # # Entrypoint prepares the database.
 # ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-COPY bin/docker-entrypoint /usr/bin/docker-entrypoint
-RUN chmod +x /usr/bin/docker-entrypoint
-ENTRYPOINT ["/usr/bin/docker-entrypoint"]
+COPY bin/docker-entrypoint /rails/bin/docker-entrypoint
+RUN chmod +x /rails/bin/docker-entrypoint
+ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+
 
 # # Start the server by default, this can be overwritten at runtime
 # EXPOSE 3000
